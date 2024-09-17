@@ -1,5 +1,6 @@
 package org.factoriaf5.pizzeriapaca.roles;
 
+import org.factoriaf5.pizzeriapaca.roles.exceptions.RoleNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service

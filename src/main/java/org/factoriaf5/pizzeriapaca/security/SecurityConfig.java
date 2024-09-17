@@ -2,11 +2,18 @@ package org.factoriaf5.pizzeriapaca.security;
 
 import java.util.Arrays;
 
+import org.factoriaf5.pizzeriapaca.security.facades.encryptations.Base64Encoder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -35,19 +42,11 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
                 .logout(out -> out
                 .logoutUrl(endpoint + "/logout")
-                .deleteCookies("ADVENTURER"))
+                .deleteCookies("pizzeriapaca"))
                 .authorizeHttpRequests(auth -> auth
-                //.requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                 .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
-                .requestMatchers(HttpMethod.POST, endpoint + "/event").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, endpoint + "/event").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, endpoint + "/event").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, endpoint + "/participant").hasAnyRole("USER", "ADMIN")
-                .requestMatchers(HttpMethod.DELETE, endpoint + "/participant/{eventId}/unregister").hasRole("USER")
-                .requestMatchers(HttpMethod.DELETE, endpoint + "/participant").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, endpoint + "/participant/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                .requestMatchers(HttpMethod.GET, endpoint + "/event/**").permitAll()
                 .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
                 .httpBasic(basic -> basic.authenticationEntryPoint(myBasicAuthenticationEntryPoint))

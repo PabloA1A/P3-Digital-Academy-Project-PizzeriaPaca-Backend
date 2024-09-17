@@ -3,6 +3,7 @@ package org.factoriaf5.pizzeriapaca.security;
 import java.util.Arrays;
 
 import org.factoriaf5.pizzeriapaca.security.facades.encryptations.Base64Encoder;
+import org.factoriaf5.pizzeriapaca.users.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

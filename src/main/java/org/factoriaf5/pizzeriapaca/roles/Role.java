@@ -2,6 +2,8 @@ package org.factoriaf5.pizzeriapaca.roles;
 
 import java.util.Set;
 
+import org.factoriaf5.pizzeriapaca.users.User;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;

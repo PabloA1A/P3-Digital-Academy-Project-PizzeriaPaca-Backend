@@ -1,5 +1,6 @@
 package org.factoriaf5.pizzeriapaca.security.facades;
 
+import org.factoriaf5.pizzeriapaca.security.facades.encryptations.Base64Encoder;
 import org.factoriaf5.pizzeriapaca.security.implementations.IEncryptFacade;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class EncoderFacade implements IEncryptFacade {
 
     PasswordEncoder bCryptPasswordEncoder;
-    base64Encoder base64Encoder;
+    Base64Encoder base64Encoder;
 
     public EncoderFacade(PasswordEncoder bCryptPasswordEncoder, Base64Encoder base64Encoder) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -16,7 +17,8 @@ public class EncoderFacade implements IEncryptFacade {
     }
 
     @Override
-    public String encode(String type, String data) {
+    public String encode(String type, String 
+    data) {
         String dataEncrypted = "";
 
         if (type == "bcrypt") {

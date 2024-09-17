@@ -3,6 +3,7 @@ package org.factoriaf5.pizzeriapaca.users;
 import java.util.Set;
 
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
+import org.factoriaf5.pizzeriapaca.roles.Role;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,7 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+//import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 

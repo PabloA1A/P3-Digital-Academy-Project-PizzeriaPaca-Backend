@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.uploadimage.exceptions;
+package org.factoriaf5.pizzeriapaca.uploadimage.local.exceptions;
 
 public class ImageException extends RuntimeException {
 

@@ -2,8 +2,6 @@ package org.factoriaf5.pizzeriapaca.profiles;
 
 import java.util.Optional;
 
-//import org.factoriaf5.pizzeriapaca.profiles.Profile;
-//import org.factoriaf5.pizzeriapaca.profiles.ProfileRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +25,4 @@ public class ProfileService {
 
         return null;
     }
-        
-
 }

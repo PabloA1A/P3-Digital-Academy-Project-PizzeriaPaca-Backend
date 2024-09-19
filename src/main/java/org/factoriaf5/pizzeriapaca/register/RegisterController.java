@@ -1,11 +1,9 @@
-package org.factoriaf5.pizzeriapaca.registers;
+package org.factoriaf5.pizzeriapaca.register;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//import org.factoriaf5.pizzeriapaca.registers.RegisterDto;
 import org.factoriaf5.pizzeriapaca.users.User;
-//import org.factoriaf5.pizzeriapaca.registers.RegisterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

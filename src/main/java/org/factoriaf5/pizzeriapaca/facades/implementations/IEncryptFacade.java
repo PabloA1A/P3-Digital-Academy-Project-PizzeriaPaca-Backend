@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.security.implementations;
+package org.factoriaf5.pizzeriapaca.facades.implementations;
 
 public interface IEncryptFacade {
 

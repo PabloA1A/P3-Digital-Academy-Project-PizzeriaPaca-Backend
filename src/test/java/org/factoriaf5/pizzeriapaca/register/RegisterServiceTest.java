@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.registers;
+package org.factoriaf5.pizzeriapaca.register;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,11 +10,11 @@ import static org.mockito.Mockito.when;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.factoriaf5.pizzeriapaca.facades.EncoderFacade;
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
 import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
 import org.factoriaf5.pizzeriapaca.roles.Role;
 import org.factoriaf5.pizzeriapaca.roles.RoleService;
-import org.factoriaf5.pizzeriapaca.security.facades.EncoderFacade;
 import org.factoriaf5.pizzeriapaca.users.User;
 import org.factoriaf5.pizzeriapaca.users.UserRepository;
 import org.junit.jupiter.api.BeforeEach;

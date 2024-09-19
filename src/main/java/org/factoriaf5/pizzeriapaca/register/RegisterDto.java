@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.registers;
+package org.factoriaf5.pizzeriapaca.register;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

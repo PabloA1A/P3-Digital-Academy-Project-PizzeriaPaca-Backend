@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.logins;
+package org.factoriaf5.pizzeriapaca.login;
 
 import java.util.HashMap;
 import java.util.Map;

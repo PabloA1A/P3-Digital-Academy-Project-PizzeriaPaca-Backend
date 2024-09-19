@@ -1,7 +1,7 @@
-package org.factoriaf5.pizzeriapaca.security.facades;
+package org.factoriaf5.pizzeriapaca.facades;
 
-import org.factoriaf5.pizzeriapaca.security.facades.encryptations.Base64Encoder;
-import org.factoriaf5.pizzeriapaca.security.implementations.IEncryptFacade;
+import org.factoriaf5.pizzeriapaca.encryptations.Base64Encoder;
+import org.factoriaf5.pizzeriapaca.facades.implementations.IEncryptFacade;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

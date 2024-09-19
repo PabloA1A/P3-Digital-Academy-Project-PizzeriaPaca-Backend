@@ -2,7 +2,7 @@ package org.factoriaf5.pizzeriapaca.security;
 
 import java.util.Arrays;
 
-import org.factoriaf5.pizzeriapaca.encryptations.Base64Encoder;
+import java.util.Base64;
 import org.factoriaf5.pizzeriapaca.users.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +61,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CorsConfigurationSource corsConfiguration() {
+    CorsConfigurationSource corsConfiguration() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
@@ -73,12 +73,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public Base64Encoder base64Encoder() {
-        return new Base64Encoder();
+    Base64.Encoder base64Encoder() {
+        return Base64.getEncoder();
     }
 }

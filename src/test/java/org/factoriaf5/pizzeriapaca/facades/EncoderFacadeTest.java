@@ -1,10 +1,10 @@
-package org.factoriaf5.pizzeriapaca.security.facades;
+package org.factoriaf5.pizzeriapaca.facades;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
-import org.factoriaf5.pizzeriapaca.security.facades.encryptations.Base64Encoder;
+import org.factoriaf5.pizzeriapaca.encryptations.Base64Encoder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

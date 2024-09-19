@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.registers;
+package org.factoriaf5.pizzeriapaca.register;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;

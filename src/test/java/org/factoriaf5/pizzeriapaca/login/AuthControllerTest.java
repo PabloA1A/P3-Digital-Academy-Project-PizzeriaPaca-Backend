@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.logins;
+package org.factoriaf5.pizzeriapaca.login;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;

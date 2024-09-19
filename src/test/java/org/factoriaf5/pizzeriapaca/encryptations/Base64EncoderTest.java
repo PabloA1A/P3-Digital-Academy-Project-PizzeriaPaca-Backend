@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.security.facades.encryptations;
+package org.factoriaf5.pizzeriapaca.encryptations;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;

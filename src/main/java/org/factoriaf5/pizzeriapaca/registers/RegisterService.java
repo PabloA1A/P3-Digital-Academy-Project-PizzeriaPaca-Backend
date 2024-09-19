@@ -3,7 +3,6 @@ package org.factoriaf5.pizzeriapaca.registers;
 import java.util.Set;
 import java.util.HashSet;
 
-//import org.factoriaf5.pizzeriapaca.registers.RegisterDto;
 import org.factoriaf5.pizzeriapaca.security.facades.EncoderFacade;
 import org.factoriaf5.pizzeriapaca.security.implementations.IEncryptFacade;
 import org.factoriaf5.pizzeriapaca.roles.Role;

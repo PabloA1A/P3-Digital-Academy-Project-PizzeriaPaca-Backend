@@ -1,14 +1,13 @@
-package org.factoriaf5.pizzeriapaca.registers;
+package org.factoriaf5.pizzeriapaca.register;
 
 import java.util.Set;
 import java.util.HashSet;
 
-//import org.factoriaf5.pizzeriapaca.registers.RegisterDto;
-import org.factoriaf5.pizzeriapaca.security.facades.EncoderFacade;
-import org.factoriaf5.pizzeriapaca.security.implementations.IEncryptFacade;
 import org.factoriaf5.pizzeriapaca.roles.Role;
 import org.factoriaf5.pizzeriapaca.roles.RoleService;
 import org.factoriaf5.pizzeriapaca.users.User;
+import org.factoriaf5.pizzeriapaca.facades.EncoderFacade;
+import org.factoriaf5.pizzeriapaca.facades.implementations.IEncryptFacade;
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
 import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
 import org.factoriaf5.pizzeriapaca.users.UserRepository;

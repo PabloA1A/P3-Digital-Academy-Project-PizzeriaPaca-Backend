@@ -42,5 +42,4 @@ public class EncoderFacade implements IEncryptFacade {
 
         return dataDecoded;
     }
-
 }

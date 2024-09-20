@@ -37,7 +37,7 @@ public class FileUploaderController {
             }
             return ResponseEntity.ok("Successfully uploaded " + files.length + " file(s)!");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Failed to upload files. Error: " + e.getMessage());
         }
     }

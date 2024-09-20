@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @RestController
-@RequestMapping("api/v1/upload-image")
+@RequestMapping("${api-endpoint}/upload-image")
 public class FileUploaderController {
 
     private IStorageService storageService;
@@ -22,7 +22,7 @@ public class FileUploaderController {
         this.storageService = storageService;
     }
 
-    @PostMapping("/posting")
+    @PostMapping()
     public ResponseEntity<String> handleFileUpload(@RequestParam("files") MultipartFile[] files,
             RedirectAttributes redirectAttributes) {
 

@@ -3,7 +3,9 @@ package org.factoriaf5.pizzeriapaca.encryptations;
 import java.util.Base64;
 
 import org.factoriaf5.pizzeriapaca.facades.implementations.IEncoder;
+import org.springframework.stereotype.Component;
 
+@Component("customBase64Encoder")
 public class Base64Encoder implements IEncoder {
 
     @Override
@@ -17,5 +19,4 @@ public class Base64Encoder implements IEncoder {
         String dataDecoded = new String(decodedBytes);
         return dataDecoded;
     }
-
 }

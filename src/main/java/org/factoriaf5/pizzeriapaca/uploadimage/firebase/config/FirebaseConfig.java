@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.google.api.client.util.Value;
+import org.springframework.beans.factory.annotation.Value;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.FirebaseApp;
@@ -22,12 +22,17 @@ public class FirebaseConfig {
 
         FileInputStream refreshToken = new FileInputStream(googleCredentialsPath);
 
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(refreshToken))
-                .setDatabaseUrl("https://console.firebase.google.com/u/0/project/pizzeria-paca/storage/pizzeria-paca.appspot.com/files")
-                .build();
-
-        return FirebaseApp.initializeApp(options);
+        try {
+            FirebaseOptions options = FirebaseOptions.builder()
+                    .setCredentials(GoogleCredentials.fromStream(refreshToken))
+                    .setDatabaseUrl("https://console.firebase.google.com/u/0/project/pizzeria-paca/storage/pizzeria-paca.appspot.com/files")
+                    .build();
+                    return FirebaseApp.initializeApp(options);
+            
+        } catch (Exception e) {
+            System.out.println("New Error" + e);
+        }
+        return null;
     }
 
 }

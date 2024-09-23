@@ -25,12 +25,12 @@ public class FirebaseConfig {
         try {
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(refreshToken))
-                    .setDatabaseUrl("https://console.firebase.google.com/u/0/project/pizzeria-paca/storage/pizzeria-paca.appspot.com/files")
+                    .setStorageBucket("pizzeria-paca.appspot.com")
                     .build();
                     return FirebaseApp.initializeApp(options);
             
         } catch (Exception e) {
-            System.out.println("New Error" + e);
+            System.out.println("-----------------------------------------------------------------------------------New Error" + e.getLocalizedMessage() + " " + e.getMessage() + " " + e.getCause() + e);
         }
         return null;
     }

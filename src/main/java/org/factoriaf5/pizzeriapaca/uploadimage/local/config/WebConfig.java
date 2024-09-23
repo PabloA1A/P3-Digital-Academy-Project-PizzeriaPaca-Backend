@@ -12,13 +12,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer{
-     @Value(value = "${api-endpoint}/**")
+
+    @Value(value = "${api-endpoint}/**")
     private String baseUrl;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(baseUrl)
-        .addResourceLocations("classpath:/static/", "classpath:/public/") 
+        .addResourceLocations("classpath:/static/", "classpath:/public/")
         .setCacheControl(CacheControl.maxAge(Duration.ofDays(365)));
 	}
 }

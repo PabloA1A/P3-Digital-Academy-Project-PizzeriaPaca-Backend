@@ -1,4 +1,5 @@
 package org.factoriaf5.pizzeriapaca.uploadimage.local.services;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -8,35 +9,33 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
-import org.factoriaf5.pizzeriapaca.uploadimage.local.config.StorageProperties;
-import org.factoriaf5.pizzeriapaca.uploadimage.local.exceptions.ImageNotFoundException;
-import org.factoriaf5.pizzeriapaca.uploadimage.local.services.implementations.IStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.factoriaf5.pizzeriapaca.uploadimage.local.config.StorageProperties;
+import org.factoriaf5.pizzeriapaca.uploadimage.local.exceptions.ImageNotFoundException;
+import org.factoriaf5.pizzeriapaca.uploadimage.local.services.implementations.IStorageService;
 
 @Service
 
-public class FileSystemStorageService implements IStorageService  {
+public class FileSystemStorageService implements IStorageService {
 
-    private final Path rootLocation;
+	private final Path rootLocation;
 
-    @Autowired
+	@Autowired
 	public FileSystemStorageService(StorageProperties properties) {
-        
-        if(properties.getLocation().trim().length() == 0){
-            throw new ImageNotFoundException("File upload location can not be Empty."); 
-        }
+
+		if (properties.getLocation().trim().length() == 0) {
+			throw new ImageNotFoundException("File upload location can not be Empty.");
+		}
 
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
 
-
-    @Override
+	@Override
 	public void store(MultipartFile file) {
 		try {
 			if (file.isEmpty()) {
@@ -46,15 +45,14 @@ public class FileSystemStorageService implements IStorageService  {
 					Paths.get(file.getOriginalFilename()))
 					.normalize().toAbsolutePath();
 			if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-                throw new ImageNotFoundException(
+				throw new ImageNotFoundException(
 						"Cannot store file outside current directory.");
 			}
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, destinationFile,
-					StandardCopyOption.REPLACE_EXISTING);
+						StandardCopyOption.REPLACE_EXISTING);
 			}
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new ImageNotFoundException("Failed to store file.", e);
 		}
 	}
@@ -63,10 +61,9 @@ public class FileSystemStorageService implements IStorageService  {
 	public Stream<Path> loadAll() {
 		try {
 			return Files.walk(this.rootLocation, 1)
-				.filter(path -> !path.equals(this.rootLocation))
-				.map(this.rootLocation::relativize);
-		}
-		catch (IOException e) {
+					.filter(path -> !path.equals(this.rootLocation))
+					.map(this.rootLocation::relativize);
+		} catch (IOException e) {
 			throw new ImageNotFoundException("Failed to read stored files", e);
 		}
 
@@ -84,14 +81,12 @@ public class FileSystemStorageService implements IStorageService  {
 			Resource resource = new UrlResource(file.toUri());
 			if (resource.exists() || resource.isReadable()) {
 				return resource;
-			}
-			else {
+			} else {
 				throw new ImageNotFoundException(
 						"Could not read file: " + filename);
 
 			}
-		}
-		catch (MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			throw new ImageNotFoundException("Could not read file: " + filename, e);
 		}
 	}
@@ -105,10 +100,8 @@ public class FileSystemStorageService implements IStorageService  {
 	public void init() {
 		try {
 			Files.createDirectories(rootLocation);
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			throw new ImageNotFoundException("Could not initialize storage", e);
 		}
 	}
 }
-

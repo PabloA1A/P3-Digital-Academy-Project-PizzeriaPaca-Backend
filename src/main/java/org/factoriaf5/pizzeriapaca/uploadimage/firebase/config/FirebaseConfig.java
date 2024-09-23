@@ -22,17 +22,12 @@ public class FirebaseConfig {
 
         FileInputStream refreshToken = new FileInputStream(googleCredentialsPath);
 
-        try {
-            FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(refreshToken))
-                    .setStorageBucket("pizzeria-paca.appspot.com")
-                    .build();
-                    return FirebaseApp.initializeApp(options);
-            
-        } catch (Exception e) {
-            System.out.println("-----------------------------------------------------------------------------------New Error" + e.getLocalizedMessage() + " " + e.getMessage() + " " + e.getCause() + e);
-        }
-        return null;
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(refreshToken))
+                .setStorageBucket("pizzeria-paca.appspot.com")
+                .build();
+
+        return FirebaseApp.initializeApp(options);
     }
 
 }

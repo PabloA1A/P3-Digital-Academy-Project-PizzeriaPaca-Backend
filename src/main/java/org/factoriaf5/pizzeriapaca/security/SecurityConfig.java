@@ -7,6 +7,7 @@ import org.factoriaf5.pizzeriapaca.users.JpaUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -44,7 +45,7 @@ public class SecurityConfig {
                 .logoutUrl(endpoint + "/logout")
                 .deleteCookies("pizzeriapaca"))
                 .authorizeHttpRequests(auth -> auth
-               /*  .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll() */
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
                 .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated())

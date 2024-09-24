@@ -2,35 +2,32 @@ package org.factoriaf5.pizzeriapaca.register.dtos;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 public class RegisterDto { 
 
-    @NotBlank(message = "Username is required")
-    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @NotBlank
     private String username;
 
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be at least 6 characters")
+    @NotBlank
     private String password;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email should be valid")
+    @Email
+    @NotBlank
     private String email;
 
-    @NotBlank(message = "First name is required")
+    @NotBlank
     private String firstName;
-    
-    @NotBlank(message = "Last name is required")
+
+    @NotBlank
     private String lastName;
-    
-    @NotBlank(message = "Address is required")
+
+    @NotBlank
     private String address;
-    
-    @NotBlank(message = "Postal code is required")
+
+    @NotBlank
     private String postalCode;
-    
-    @NotBlank(message = "City is required")
+
+    @NotBlank
     private String city;
     
     public RegisterDto(String username, String password, String email, String firstName, String lastName,

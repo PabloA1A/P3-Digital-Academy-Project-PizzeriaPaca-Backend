@@ -1,6 +1,7 @@
 package org.factoriaf5.pizzeriapaca.register.dtos;
 
-import jakarta.persistence.Column;
+import org.factoriaf5.pizzeriapaca.users.User;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,23 +13,40 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "addresses")
 public class Address {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_customer")
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @Column(name = "address", nullable = false)
     private String address;
-
-    @Column(name = "postal_code", nullable = false)
     private String postalCode;
-
-    @Column(name = "city", nullable = false)
     private String city;
+
+    public Address() {
+    }
+
+    public Address(User user, String address, String postalCode, String city) {
+        this.user = user;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -36,14 +54,6 @@ public class Address {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     public String getAddress() {
@@ -68,5 +78,13 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

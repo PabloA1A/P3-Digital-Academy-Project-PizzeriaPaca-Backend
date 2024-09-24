@@ -10,6 +10,7 @@ import org.factoriaf5.pizzeriapaca.facades.EncoderFacade;
 import org.factoriaf5.pizzeriapaca.facades.implementations.IEncryptFacade;
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
 import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
+import org.factoriaf5.pizzeriapaca.register.dtos.RegisterDto;
 import org.factoriaf5.pizzeriapaca.users.UserRepository;
 import org.springframework.stereotype.Service;
 

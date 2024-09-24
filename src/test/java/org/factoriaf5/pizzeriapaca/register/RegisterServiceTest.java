@@ -13,6 +13,7 @@ import java.util.Set;
 import org.factoriaf5.pizzeriapaca.facades.EncoderFacade;
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
 import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
+import org.factoriaf5.pizzeriapaca.register.dtos.RegisterDto;
 import org.factoriaf5.pizzeriapaca.roles.Role;
 import org.factoriaf5.pizzeriapaca.roles.RoleService;
 import org.factoriaf5.pizzeriapaca.users.User;

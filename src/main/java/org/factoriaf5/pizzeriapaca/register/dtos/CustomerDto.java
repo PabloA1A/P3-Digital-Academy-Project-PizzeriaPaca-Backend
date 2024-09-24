@@ -9,6 +9,7 @@ public class CustomerDto {
     private String address;
     private String postalCode;
     private String city;
+    
     public Long getId() {
         return id;
     }

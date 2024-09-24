@@ -30,6 +30,17 @@ public class Customer {
     @Column(name = "lastname", nullable = false)
     private String lastName;
 
+    public Customer() {
+    }
+
+    public Customer(String username, String password, String email, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

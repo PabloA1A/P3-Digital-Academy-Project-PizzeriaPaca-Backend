@@ -1,54 +1,51 @@
 package org.factoriaf5.pizzeriapaca.register;
 
-import java.util.Set;
-import java.util.HashSet;
-
-import org.factoriaf5.pizzeriapaca.roles.Role;
-import org.factoriaf5.pizzeriapaca.roles.RoleService;
 import org.factoriaf5.pizzeriapaca.users.User;
-import org.factoriaf5.pizzeriapaca.facades.EncoderFacade;
-import org.factoriaf5.pizzeriapaca.facades.implementations.IEncryptFacade;
-import org.factoriaf5.pizzeriapaca.profiles.Profile;
-import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
+import org.factoriaf5.pizzeriapaca.register.dtos.Address;
+import org.factoriaf5.pizzeriapaca.register.dtos.Customer;
+import org.factoriaf5.pizzeriapaca.register.dtos.CustomerRepository;
+import org.factoriaf5.pizzeriapaca.register.dtos.RegisterDto;
 import org.factoriaf5.pizzeriapaca.users.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RegisterService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
     
-    private final UserRepository userRepository;
-    private final RoleService roleService;
-    private final ProfileService profileService;
-    private final IEncryptFacade encoderFacade;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public RegisterService(UserRepository userRepository, RoleService roleService, ProfileService profileService, EncoderFacade encoderFacade) {
-        this.userRepository = userRepository;
-        this.roleService = roleService;
-        this.profileService = profileService;
-        this.encoderFacade = encoderFacade;
-    }
+    public User save(RegisterDto registerDto) {
+        User user = new User();
+        user.setUsername(registerDto.getUsername());
+        user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        user.setEmail(registerDto.getEmail());
+        userRepository.save(user);
 
-    public User save(RegisterDto newRegisterDto) {
-        String passwordDecoded = encoderFacade.decode("base64", newRegisterDto.getPassword());
-        String passwordEncoded = encoderFacade.encode("bcrypt", passwordDecoded);
+        Customer customer = new Customer();
+        customer.setUsername(registerDto.getUsername());
+        customer.setPassword(passwordEncoder.encode(registerDto.getPassword()));
+        customer.setEmail(registerDto.getEmail());
+        customer.setFirstName(registerDto.getFirstName());
+        customer.setLastName(registerDto.getLastName());
 
-        User user = new User(newRegisterDto.getUsername(), passwordEncoded);
-        user.setRoles(assignDefaultRole());
+        Address address = new Address();
+        address.setUser(user); 
+        address.setCustomer(customer); 
+        address.setAddress(registerDto.getAddress());
+        address.setPostalCode(registerDto.getPostalCode());
+        address.setCity(registerDto.getCity());
 
-        User savedUser = userRepository.save(user);
+        customer.addAddress(address);
+        customerRepository.save(customer);
 
-        Profile profile = new Profile(newRegisterDto.getEmail(), savedUser);
-        profileService.save(profile);
-
-        return savedUser;
-    }
-
-    public Set<Role> assignDefaultRole() {
-        Role defaultRole = roleService.getById(1L);
-
-        Set<Role> roles = new HashSet<>();
-        roles.add(defaultRole);
-
-        return roles;
+        return user;
     }
 }

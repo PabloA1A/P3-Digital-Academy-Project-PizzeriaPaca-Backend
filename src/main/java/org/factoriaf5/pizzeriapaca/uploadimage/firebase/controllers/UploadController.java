@@ -17,7 +17,7 @@ import java.net.URL;
 @RequestMapping(path = "${api-endpoint}/images")
 public class UploadController {
     
-    @PostMapping()
+    @PostMapping()  
     public String upload(@RequestParam("file")MultipartFile file) throws IOException{
 
         Bucket bucket = StorageClient.getInstance().bucket();

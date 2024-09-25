@@ -1,5 +1,6 @@
 package org.factoriaf5.pizzeriapaca.uploadimage.firebase.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,15 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "files")
+@Table(name = "filerecords")
 public class FileRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String fileName;
+    @Column(length = 10000)
     private String fileUrl;
+    @Column
     private Long fileSize;
 
     public FileRecord() {

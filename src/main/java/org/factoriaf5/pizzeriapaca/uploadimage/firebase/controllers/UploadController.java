@@ -23,6 +23,6 @@ public class UploadController {
     @PostMapping()
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
         String fileUrl = uploadService.uploadFileToFirebaseAndSaveRecord(file);
-        return ResponseEntity.ok("Archivo subido con éxito. URL: " + fileUrl);
+        return ResponseEntity.ok("FILE UPLOADED!!! URL: " + fileUrl);
     }
 }

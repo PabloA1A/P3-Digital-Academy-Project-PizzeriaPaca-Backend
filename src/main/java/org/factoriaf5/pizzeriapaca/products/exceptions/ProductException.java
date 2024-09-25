@@ -1,6 +1,6 @@
 package org.factoriaf5.pizzeriapaca.products.exceptions;
 
-public class ProductException  extends RuntimeException {
+public class ProductException extends RuntimeException {
 
     public ProductException(String message) {
         super(message);

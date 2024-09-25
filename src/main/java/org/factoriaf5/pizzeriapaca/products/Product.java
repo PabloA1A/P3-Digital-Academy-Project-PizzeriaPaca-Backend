@@ -1,8 +1,9 @@
 package org.factoriaf5.pizzeriapaca.products;
 
-// import java.util.HashSet;
-// import jakarta.persistence.*;
-// import java.util.Set;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.factoriaf5.pizzeriapaca.orders.Order;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +12,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-// import jakarta.persistence.JoinColumn;
-// import jakarta.persistence.JoinTable;
-// import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -45,10 +46,10 @@ public class Product {
     @Column(name = "available")
     private Boolean available;
 
-    // @ManyToMany  Comentado porque aún no esta vcreado el modelo order, tambien comentados getter y setter
-    // @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "product_id"), 
-    // inverseJoinColumns = @JoinColumn(name = "order_id"))
-    // private Set<Order> orders = new HashSet<>();
+    @ManyToMany  
+    @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "product_id"), 
+    inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Set<Order> orders = new HashSet<>();
 
     public Product() {
     }
@@ -120,12 +121,12 @@ public class Product {
         this.available = available;
     }
 
-    // public Set<Order> getOrders() {
-    //     return orders;
-    // }
+    public Set<Order> getOrders() {
+        return orders;
+    }
 
-    // public void setOrders(Set<Order> orders) {
-    //     this.orders = orders;
-    // }
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 
 }

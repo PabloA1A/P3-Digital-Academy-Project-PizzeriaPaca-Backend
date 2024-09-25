@@ -1,5 +1,6 @@
 package org.factoriaf5.pizzeriapaca.products;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,18 @@ public class ProductTest {
     }
 
     @Test
-    void testIsAvailable() {
-        assertTrue(product.getAvailable(), "The product should be available.");
+    void testSetAvailableTrue() {
+        product.setAvailable(true);
+        assertTrue(product.getAvailable(), "The product should be available after setting to true.");
     }
+
+    @Test
+    void testSetAvailableFalse() {
+        product.setAvailable(false);
+        assertFalse(product.getAvailable(), "The product should not be available after setting to false.");
+    }
+
+
 
     @Test
     void testGetId() {

@@ -1,7 +1,8 @@
-package org.factoriaf5.pizzeriapaca.register;
+package org.factoriaf5.pizzeriapaca.register.dtos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.factoriaf5.pizzeriapaca.register.dtos.RegisterDto;
 import org.junit.jupiter.api.Test;
 
 public class RegisterDtoTest {

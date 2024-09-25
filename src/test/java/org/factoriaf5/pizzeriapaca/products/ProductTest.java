@@ -26,8 +26,6 @@ public class ProductTest {
         assertFalse(product.getAvailable(), "The product should not be available after setting to false.");
     }
 
-
-
     @Test
     void testGetId() {
         assertEquals(1L, product.getId(), "The product ID should be 1.");

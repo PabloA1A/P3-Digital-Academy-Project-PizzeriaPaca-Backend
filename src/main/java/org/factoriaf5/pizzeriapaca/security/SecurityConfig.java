@@ -52,7 +52,6 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/upload-image").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/images").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
@@ -75,10 +74,8 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-        configuration.setMaxAge(Duration.ofHours(1)); 
-
         configuration.setAllowedHeaders(Arrays.asList("", "Content-Type"));
+        configuration.setMaxAge(Duration.ofHours(1)); 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

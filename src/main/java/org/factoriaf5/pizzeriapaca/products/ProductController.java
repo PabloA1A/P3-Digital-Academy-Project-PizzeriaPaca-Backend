@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "${api-endpoint}/products") 
+@RequestMapping(path = "${api-endpoint}/products") // OK
 public class ProductController {
 
     private final ProductService productService;
@@ -19,13 +19,13 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping(path = "/all") // OK
     public ResponseEntity<List<Product>> getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/{id}") //OK
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
         try {
             Product product = productService.getProductById(id);
@@ -35,24 +35,20 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create") // OK
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         Product createdProduct = productService.createProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "/{id}") // OK
     public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable Long id) {
         product.setId(id);
-        try {
-            Product updatedProduct = productService.updateProduct(product);
-            return ResponseEntity.ok(updatedProduct);
-        } catch (ProductNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        Product updateProduct = productService.updateProduct(product);
+        return ResponseEntity.ok(updateProduct);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/{id}") // OK
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         try {
             productService.deleteProductById(id);
@@ -62,13 +58,13 @@ public class ProductController {
         }
     }
 
-    @GetMapping(path = "/type/{productType}")
-    public ResponseEntity<List<Product>> getProductsByType(@PathVariable ProductType productType) {
-        List<Product> products = productService.getProductsByType(productType);
+    @GetMapping(path = "/type/{productType}") //OK
+    public ResponseEntity<List<Product>> getProductByType(@PathVariable ProductType productType) {
+        List<Product> products = productService.getByProductsType(productType);
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/available")
+    @GetMapping("/available") // OK
     public ResponseEntity<List<Product>> getAvailableProduct() {
         List<Product> availableProducts = productService.getAvailableProducts();
         return ResponseEntity.ok(availableProducts);

@@ -38,8 +38,8 @@ public class ProductService {
         repository.deleteById(id);
     }
 
-    public List<Product> getProductsByType(ProductType type) { 
-        return repository.findByProductType(type); 
+    public List<Product> getByProductsType(ProductType productType) { 
+        return repository.findByProductType(productType); 
     }
 
     public List<Product> getAvailableProducts() {

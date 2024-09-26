@@ -4,10 +4,6 @@ import java.util.HashSet;
 import java.util.Arrays;
 
 import org.factoriaf5.pizzeriapaca.users.User;
-import org.factoriaf5.pizzeriapaca.register.dtos.Address;
-import org.factoriaf5.pizzeriapaca.register.dtos.Customer;
-import org.factoriaf5.pizzeriapaca.register.dtos.CustomerRepository;
-import org.factoriaf5.pizzeriapaca.register.dtos.RegisterDto;
 import org.factoriaf5.pizzeriapaca.roles.Role;
 import org.factoriaf5.pizzeriapaca.roles.RoleRepository;
 import org.factoriaf5.pizzeriapaca.roles.exceptions.RoleNotFoundException;

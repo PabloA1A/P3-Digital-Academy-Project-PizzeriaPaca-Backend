@@ -2,7 +2,6 @@ package org.factoriaf5.pizzeriapaca.uploadimage.local.controllers;
 
 import org.factoriaf5.pizzeriapaca.uploadimage.local.services.implementations.IStorageService;
 import org.apache.http.HttpStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ public class FileUploaderController {
 
     private IStorageService storageService;
 
-    @Autowired
     public FileUploaderController(IStorageService storageService) {
         this.storageService = storageService;
     }

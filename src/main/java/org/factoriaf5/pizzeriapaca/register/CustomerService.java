@@ -1,4 +1,4 @@
-package org.factoriaf5.pizzeriapaca.register.dtos;
+package org.factoriaf5.pizzeriapaca.register;
 
 import java.util.List;
 

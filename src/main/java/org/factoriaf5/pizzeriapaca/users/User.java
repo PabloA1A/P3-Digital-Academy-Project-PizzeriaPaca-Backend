@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
-import org.factoriaf5.pizzeriapaca.register.dtos.Address;
+import org.factoriaf5.pizzeriapaca.register.Address;
 import org.factoriaf5.pizzeriapaca.roles.Role;
 
 import jakarta.persistence.CascadeType;

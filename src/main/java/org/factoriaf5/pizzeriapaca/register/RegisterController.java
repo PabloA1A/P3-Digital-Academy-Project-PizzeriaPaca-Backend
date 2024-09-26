@@ -3,7 +3,6 @@ package org.factoriaf5.pizzeriapaca.register;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.factoriaf5.pizzeriapaca.register.dtos.RegisterDto;
 import org.factoriaf5.pizzeriapaca.users.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

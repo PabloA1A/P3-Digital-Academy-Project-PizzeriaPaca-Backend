@@ -47,8 +47,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                
                 .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/all").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/available").permitAll()
+                .requestMatchers(HttpMethod.GET, endpoint + "/products/type/{productType}").permitAll()
+                .requestMatchers(HttpMethod.DELETE, endpoint + "/products/{id}").permitAll()
+                .requestMatchers(HttpMethod.PUT, endpoint + "/products/{id}").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, endpoint + "/products/{id}").hasAnyRole("ADMIN")
+
                 .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
                 .httpBasic(basic -> basic.authenticationEntryPoint(myBasicAuthenticationEntryPoint))

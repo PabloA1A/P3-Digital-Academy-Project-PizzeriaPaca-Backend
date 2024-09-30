@@ -1,6 +1,9 @@
 package org.factoriaf5.pizzeriapaca.users;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.factoriaf5.pizzeriapaca.profiles.Profile;
 import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
@@ -9,10 +12,6 @@ import org.factoriaf5.pizzeriapaca.roles.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -31,22 +30,17 @@ public class UserService {
     }
 
     public User saveUser(User user, Set<String> roleNames, String email) {
-        
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        
         Set<Role> roles = roleNames.stream()
-                .map(roleService::getRoleByName) 
+                .map(roleService::getRoleByName)
                 .collect(Collectors.toSet());
         user.setRoles(roles);
 
-        
         User savedUser = userRepository.save(user);
-        
-       
+
         Profile profile = new Profile(email, savedUser);
         profileService.save(profile);
 
-        
         return savedUser;
     }
 
@@ -55,20 +49,23 @@ public class UserService {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             user.setUsername(userDto.getUsername());
-            user.setPassword(passwordEncoder.encode(userDto.getPassword())); 
 
-            
+            if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+                user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            }
+
             Set<Role> roles = roleNames.stream()
                 .map(roleService::getRoleByName)
                 .collect(Collectors.toSet());
             user.setRoles(roles);
 
-            
             User updatedUser = userRepository.save(user);
 
-           
-            @SuppressWarnings("unused")
-            Profile profile = profileService.save(new Profile(email, updatedUser));
+            Profile profile = profileService.findByUserId(user.getId())
+                    .orElse(new Profile(email, updatedUser));
+
+            profile.setEmail(email);
+            profileService.save(profile);
 
             return Optional.of(updatedUser);
         } else {
@@ -82,5 +79,24 @@ public class UserService {
 
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    public Optional<UserDto> findUserById(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.flatMap(user -> {
+            Optional<Profile> profileOptional = profileService.findByUserId(user.getId());
+            String email = profileOptional.map(Profile::getEmail).orElse(null);
+
+            return Optional.of(new UserDto(
+                user.getUsername(),
+                user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()),
+                email
+            ));
+        });
+    }
+
+    public String getEmailByUserId(Long userId) {
+        Optional<Profile> profileOptional = profileService.findByUserId(userId);
+        return profileOptional.map(Profile::getEmail).orElse(null);
     }
 }

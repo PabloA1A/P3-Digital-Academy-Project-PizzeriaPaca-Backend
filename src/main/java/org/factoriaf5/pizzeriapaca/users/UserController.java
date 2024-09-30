@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -21,25 +21,37 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public List<User> getAllUsers() {
-        return userService.findAllUsers();
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        Optional<UserDto> userOptional = userService.findUserById(id);
+        return userOptional
+                .map(userDto -> new ResponseEntity<>(userDto, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<User> createUser(@RequestHeader UserDto userDto, 
-                                           @RequestParam Set<String> roles, 
-                                           @RequestParam String email) {
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.findAllUsers()
+            .stream()
+            .map(user -> new UserDto(
+                user.getUsername(),
+                user.getRoles().stream().map(role -> role.getName()).collect(Collectors.toSet()),
+                userService.getEmailByUserId(user.getId())
+            ))
+            .collect(Collectors.toList());
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
         User newUser = new User(userDto.getUsername(), userDto.getPassword());
-        User savedUser = userService.saveUser(newUser, roles, email);
+        User savedUser = userService.saveUser(newUser, userDto.getRoles(), userDto.getEmail());
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, 
-                                           @RequestHeader UserDto userDto,
-                                           @RequestParam Set<String> roles, 
-                                           @RequestParam String email) {
-        Optional<User> updatedUser = userService.updateUser(id, userDto, roles, email);
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        Optional<User> updatedUser = userService.updateUser(id, userDto, userDto.getRoles(), userDto.getEmail());
         return updatedUser
                 .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));

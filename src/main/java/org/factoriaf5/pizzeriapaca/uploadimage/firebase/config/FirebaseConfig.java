@@ -16,9 +16,11 @@ public class FirebaseConfig {
 
     @Value("${google-app-credentials}")
     private String googleCredentialsPath;
+    
 
     @Bean(name = "firebase")
     public FirebaseApp initFirebaseApp() throws IOException {
+        if (FirebaseApp.getApps().isEmpty()) {
 
         FileInputStream refreshToken = new FileInputStream(googleCredentialsPath);
 
@@ -28,6 +30,9 @@ public class FirebaseConfig {
                 .build();
 
         return FirebaseApp.initializeApp(options);
-    }
+    } else {
+        return FirebaseApp.getInstance();
 
+}
+}
 }

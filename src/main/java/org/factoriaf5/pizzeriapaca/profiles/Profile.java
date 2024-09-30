@@ -1,5 +1,6 @@
 package org.factoriaf5.pizzeriapaca.profiles;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.factoriaf5.pizzeriapaca.users.User;
 
 import jakarta.persistence.*;
@@ -16,10 +17,10 @@ public class Profile {
 
     @OneToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
-    public Profile() {
-    }
+    public Profile() {}
 
     public Profile(String email, User user) {
         this.email = email;

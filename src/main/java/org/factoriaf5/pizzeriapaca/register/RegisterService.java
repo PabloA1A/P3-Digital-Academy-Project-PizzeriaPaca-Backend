@@ -35,13 +35,13 @@ public class RegisterService {
 
         Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_USER"));
-        Role cocinaRole = roleRepository.findByName("ROLE_COCINA")
-                .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_COCINA"));
-        Role motoristaRole = roleRepository.findByName("ROLE_MOTORISTA")
-                .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_MOTORISTA"));
+        Role kitchenRole = roleRepository.findByName("ROLE_KITCHEN")
+                .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_KITCHEN"));
+        Role motoristRole = roleRepository.findByName("ROLE_MOTORIST")
+                .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_MOTORIST"));
         Role adminRole = roleRepository.findByName("ROLE_ADMIN")
                 .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_ADMIN"));
-        user.setRoles(new HashSet<>(Arrays.asList(userRole, cocinaRole, motoristaRole, adminRole)));
+        user.setRoles(new HashSet<>(Arrays.asList(userRole, kitchenRole, motoristRole, adminRole)));
 
         userRepository.save(user);
 

@@ -1,7 +1,5 @@
 package org.factoriaf5.pizzeriapaca.users;
 
-//import org.factoriaf5.pizzeriapaca.users.SecurityUser;
-//import org.factoriaf5.pizzeriapaca.users.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

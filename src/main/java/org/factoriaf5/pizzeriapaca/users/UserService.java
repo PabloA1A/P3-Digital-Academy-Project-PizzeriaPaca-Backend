@@ -9,7 +9,6 @@ import org.factoriaf5.pizzeriapaca.profiles.Profile;
 import org.factoriaf5.pizzeriapaca.profiles.ProfileService;
 import org.factoriaf5.pizzeriapaca.roles.Role;
 import org.factoriaf5.pizzeriapaca.roles.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,6 @@ public class UserService {
     private final ProfileService profileService;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    @Autowired
     public UserService(UserRepository userRepository, RoleService roleService, ProfileService profileService) {
         this.userRepository = userRepository;
         this.roleService = roleService;

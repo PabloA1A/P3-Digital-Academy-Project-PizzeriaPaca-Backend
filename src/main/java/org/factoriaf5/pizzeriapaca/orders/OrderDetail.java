@@ -33,6 +33,10 @@ public class OrderDetail {
     @Column(name = "order_id")
     private Order order;
 
+    public OrderDetail() {
+
+    }
+
     public OrderDetail(Long id, Long orderId, Long productId, Integer productQuantity, Order order) {
         this.id = id;
         this.orderId = orderId;

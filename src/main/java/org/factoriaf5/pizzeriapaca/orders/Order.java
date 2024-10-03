@@ -28,8 +28,8 @@ public class Order {
     @Column(name = "order_status")
     private String orderStatus;
 
-    @Column(name = "order_date")
-    private Date orderDate;
+    @Column(name = "date_order")
+    private Date dateOrder;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetail> orderDetails;
@@ -37,14 +37,14 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Date orderDate) {
+    public Order(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Date dateOrder) {
         this.orderId = orderId;
         this.orderNumber = orderNumber;
         this.orderTypeCode = orderTypeCode;
         this.userId = userId;
         this.paymentId = paymentId;
         this.orderStatus = orderStatus;
-        this.orderDate = orderDate;
+        this.dateOrder = dateOrder;
     }
 
     public Long getOrderId() {
@@ -55,12 +55,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public Date getDateOrder() {
+        return dateOrder;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setDateOrder(Date dateOrder) {
+        this.dateOrder = dateOrder;
     }
 
     public String getOrderNumber() {

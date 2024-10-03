@@ -50,34 +50,4 @@ public class OrderController {
         orderService.deleteOrderById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/details")
-    public List<OrderDetail> getAllOrderDetails() {
-        return orderService.getAllOrderDetails();
-    }
-
-    @GetMapping("/details/{id}")
-    public ResponseEntity<OrderDetail> getOrderDetailById(@PathVariable Long id) {
-        OrderDetail orderDetail = orderService.getOrderDetailById(id);
-        return new ResponseEntity<>(orderDetail, HttpStatus.OK);
-    }
-
-    @PostMapping("/details")
-    public ResponseEntity<OrderDetail> createOrderDetail(@RequestBody OrderDetail orderDetail) {
-        OrderDetail createdOrderDetail = orderService.createOrderDetail(orderDetail);
-        return new ResponseEntity<>(createdOrderDetail, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/details/{id}")
-    public ResponseEntity<OrderDetail> updateOrderDetail(@PathVariable Long id, @RequestBody OrderDetail orderDetail) {
-        orderDetail.setId(id);
-        OrderDetail updatedOrderDetail = orderService.updateOrderDetail(orderDetail);
-        return new ResponseEntity<>(updatedOrderDetail, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/details/{id}")
-    public ResponseEntity<Void> deleteOrderDetail(@PathVariable Long id) {
-        orderService.deleteOrderDetailById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

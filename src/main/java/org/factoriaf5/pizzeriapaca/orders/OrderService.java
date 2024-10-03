@@ -11,9 +11,6 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private OrderDetailRepository orderDetailRepository;
-
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
@@ -38,31 +35,5 @@ public class OrderService {
             throw new RuntimeException("Order not found");
         }
         orderRepository.deleteById(id);
-    }
-
-    public List<OrderDetail> getAllOrderDetails() {
-        return orderDetailRepository.findAll();
-    }
-
-    public OrderDetail getOrderDetailById(Long id) {
-        return orderDetailRepository.findById(id).orElseThrow(() -> new RuntimeException("OrderDetail not found"));
-    }
-
-    public OrderDetail createOrderDetail(OrderDetail orderDetail) {
-        return orderDetailRepository.save(orderDetail);
-    }
-
-    public OrderDetail updateOrderDetail(OrderDetail orderDetail) {
-        if (!orderDetailRepository.existsById(orderDetail.getId())) {
-            throw new RuntimeException("OrderDetail not found");
-        }
-        return orderDetailRepository.save(orderDetail);
-    }
-
-    public void deleteOrderDetailById(Long id) {
-        if (!orderDetailRepository.existsById(id)) {
-            throw new RuntimeException("OrderDetail not found");
-        }
-        orderDetailRepository.deleteById(id);
     }
 }

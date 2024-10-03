@@ -3,6 +3,7 @@ package org.factoriaf5.pizzeriapaca.products;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.factoriaf5.pizzeriapaca.orders.Order;
 import org.factoriaf5.pizzeriapaca.orders.OrderDto;
 
 import jakarta.persistence.Column;
@@ -45,13 +46,9 @@ public class Product {
     @Column(name = "available")
     private Boolean available;
 
-    @ManyToMany  
-    @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "product_id"), 
-    inverseJoinColumns = @JoinColumn(name = "order_id"))
-    private Set<OrderDto> orders = new HashSet<>();
-    //Esto lo hay que revisar creo q esto iría en order y aqui:
-    //@ManyToMany(mappedBy = "products")
-    //private Set<Order> orders = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Set<Order> orders = new HashSet<>();
 
     public Product() {
     }
@@ -123,11 +120,11 @@ public class Product {
         this.available = available;
     }
 
-    public Set<OrderDto> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<OrderDto> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 

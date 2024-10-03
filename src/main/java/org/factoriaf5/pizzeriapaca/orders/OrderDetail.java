@@ -19,7 +19,7 @@ public class OrderDetail {
     @Column(name = "order_detail_id")
     private Long id;
 
-    @Column(name = "order_id")
+    @Column(name = "order_id", insertable = false, updatable = false)
     private Long orderId;
 
     @Column(name = "product_id")
@@ -30,7 +30,6 @@ public class OrderDetail {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    @Column(name = "order_id")
     private Order order;
 
     public OrderDetail() {

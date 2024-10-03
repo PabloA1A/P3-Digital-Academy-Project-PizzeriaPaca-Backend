@@ -2,6 +2,7 @@ package org.factoriaf5.pizzeriapaca.orders;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +28,7 @@ public class OrderDetail {
     @Column(name = "product_quantity")
     private Integer productQuantity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     @Column(name = "order_id")
     private Order order;

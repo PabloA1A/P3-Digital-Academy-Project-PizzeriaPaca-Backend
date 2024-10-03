@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "${api-endpoint}/orders")
+@RequestMapping(path = "${api-endpoint}/order")
 public class OrderDtoController {
     
      private final OrderDtoService service;

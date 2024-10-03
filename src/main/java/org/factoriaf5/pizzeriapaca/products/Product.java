@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.factoriaf5.pizzeriapaca.orders.Order;
-import org.factoriaf5.pizzeriapaca.orders.OrderDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/order-details")
+@RequestMapping(path = "${api-endpoint}/order-details")
 public class OrderDetailController {
 
     @Autowired

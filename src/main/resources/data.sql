@@ -35,7 +35,7 @@ INSERT INTO addresses (user_id, customer_id, address, postal_code, city) VALUES
 
 --- Products
 INSERT INTO products (name, description, price, product_type, image, available) VALUES
-('Pizza Margherita', 'Pizza clásica con salsa de tomate, mozzarella y albahaca fresca.', 12.99, 'PIZZA', 'pizza-margherita.jpg', TRUE),
+('Pizza Margherita', 'Pizza clásica con salsa de tomate, mozzarella y albahaca fresca.', 12.99, 'PIZZA', 'pizzapeee.jpeg', TRUE),
 ('Aqua Panna', 'Agua mineral natural de manantial, suave y refrescante.', 3.00, 'BEBIDA', 'aqua-panna.jpg', TRUE),
 ('Tiramisú', 'Delicioso postre italiano de café y mascarpone.', 5.99, 'POSTRE', 'tiramisú.jpg', TRUE),
 

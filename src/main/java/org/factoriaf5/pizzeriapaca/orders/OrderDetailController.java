@@ -21,7 +21,7 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<OrderDetail> getAllOrderDetails() {
         return orderDetailService.getAllOrderDetails();
     }

@@ -17,11 +17,11 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "${api-endpoint}/orders")
 public class OrderController {
-    
-     @Autowired
+
+    @Autowired
     private OrderService orderService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }

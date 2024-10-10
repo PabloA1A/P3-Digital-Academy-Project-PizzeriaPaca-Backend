@@ -1,8 +1,8 @@
 package org.factoriaf5.pizzeriapaca.orders;
 
 import java.sql.Date;
-import java.util.Set;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -32,9 +32,10 @@ public class Order {
     private Date dateOrder;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderDetail> orderDetails;
+    private List<OrderDetail> orderDetails;
 
     public Order() {
+        
     }
 
     public Order(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Date dateOrder) {
@@ -103,11 +104,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Set<OrderDetail> getOrderDetails() {
+    public List<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
     }
 }

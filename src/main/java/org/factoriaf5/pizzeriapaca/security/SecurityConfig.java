@@ -51,6 +51,7 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST, endpoint + "/upload-image").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, endpoint + "/images").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()

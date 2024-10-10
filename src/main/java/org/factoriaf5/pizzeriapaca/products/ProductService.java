@@ -45,5 +45,9 @@ public class ProductService {
     public List<Product> getAvailableProducts() {
         return repository.findByAvailableTrue();
     }
+
+    public List<Product> getAvailableProductsByType(ProductType productType) {
+        return repository.findByProductTypeAndAvailableTrue(productType);
+    }
     
 }

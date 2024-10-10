@@ -67,4 +67,10 @@ public class ProductController {
         List<Product> availableProducts = productService.getAvailableProducts();
         return ResponseEntity.ok(availableProducts);
     }
+
+    @GetMapping(path = "/type/{productType}/available")
+    public ResponseEntity<List<Product>> getAvailableProductsByType(@PathVariable ProductType productType) {
+        List<Product> availableProducts = productService.getAvailableProductsByType(productType);
+        return ResponseEntity.ok(availableProducts);
+    }
 }

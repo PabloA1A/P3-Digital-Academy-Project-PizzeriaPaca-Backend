@@ -1,6 +1,6 @@
 -- Roles
-INSERT INTO roles (role_id, name) VALUES (default, 'ROLE_USER');
-INSERT INTO roles (role_id, name) VALUES (default, 'ROLE_ADMIN');
+INSERT INTO roles (role_id, name) VALUES (default,'ROLE_USER');
+INSERT INTO roles (role_id, name) VALUES (default,'ROLE_ADMIN');
 INSERT INTO roles (role_id, name) VALUES (default,'ROLE_KITCHEN');
 INSERT INTO roles (role_id, name) VALUES (default,'ROLE_MOTORIST');
 
@@ -10,11 +10,18 @@ INSERT INTO users (user_id, username, password) VALUES (default, 'user', '$2a$12
 INSERT INTO users (user_id, username, password) VALUES (default, 'admin', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
 INSERT INTO users (user_id, username, password) VALUES (default, 'kitchen', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
 INSERT INTO users (user_id, username, password) VALUES (default, 'motorist', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
+INSERT INTO users (user_id, username, password) VALUES (default, 'L_user1', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
+INSERT INTO users (user_id, username, password) VALUES (default, 'L_user2', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
+INSERT INTO users (user_id, username, password) VALUES (default, 'L_user3', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
 -- Roles_Users
 INSERT INTO roles_users (role_id, user_id) VALUES (1, 1); 
 INSERT INTO roles_users (role_id, user_id) VALUES (2, 2);
 INSERT INTO roles_users (role_id, user_id) VALUES (3, 3);  
-INSERT INTO roles_users (role_id, user_id) VALUES (4, 4);  
+INSERT INTO roles_users (role_id, user_id) VALUES (4, 4);
+
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 5);
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 6);
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 7);  
 
 -- Profiles
 
@@ -23,6 +30,9 @@ INSERT INTO profiles (email, user_id) VALUES ('admin@mail.com', 2);
 INSERT INTO profiles (email, user_id) VALUES ('kitchen@mail.com', 3);
 INSERT INTO profiles (email, user_id) VALUES ('motorist@mail.com', 4);
 
+INSERT INTO profiles (email, user_id) VALUES ('user_1@mail.com', 5);
+INSERT INTO profiles (email, user_id) VALUES ('user_2@mail.com', 6);
+INSERT INTO profiles (email, user_id) VALUES ('use_3r@mail.com', 7);
 -- Customers
 INSERT INTO customers (username, password, email, first_name, last_name) VALUES ('customeruser', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO', 'customeruser@mail.com', 'Customer', 'User');
 INSERT INTO customers (username, password, email, first_name, last_name) VALUES ('customeradmin', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO', 'customeradmin@mail.com', 'Customer', 'Admin');

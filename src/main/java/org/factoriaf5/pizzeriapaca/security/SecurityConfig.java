@@ -3,6 +3,7 @@ package org.factoriaf5.pizzeriapaca.security;
 import java.util.Arrays;
 
 import java.util.Base64;
+
 import org.springframework.boot.CommandLineRunner;
 
 
@@ -56,6 +57,7 @@ public class SecurityConfig {
 
                 .requestMatchers(HttpMethod.POST, endpoint + "/upload-image").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/images").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/images").permitAll()
                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
                 .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
                 .requestMatchers(HttpMethod.GET, endpoint + "/all").hasAnyRole("ADMIN")

@@ -32,7 +32,7 @@ INSERT INTO addresses (user_id, customer_id, address, postal_code, city) VALUES
 (1, 1, '123 User St', '12345', 'User City'),
 (2, 2, '456 Admin Ave', '67890', 'Admin City');
 
-
+ALTER TABLE products MODIFY image VARCHAR(1000);
 --- Products
 INSERT INTO products (name, description, price, product_type, image, available) VALUES
 ('Pizza Romana', 'Pizza romana con masa fina, crujiente y ligera. Ingredientes: salsa de tomate, mozzarella, albahaca, aceite de oliva, prosciutto, champiñones, alcachofas y aceitunas.', 12.00, 'PIZZA', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2FpizzaRomana.png?alt=media&token=6ea1d86d-f741-4df8-bd98-cb4269a3fa62', TRUE),

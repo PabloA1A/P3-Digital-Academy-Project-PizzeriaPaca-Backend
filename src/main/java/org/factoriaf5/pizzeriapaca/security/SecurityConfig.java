@@ -67,6 +67,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, endpoint + "/products/{id}").permitAll()
                 .requestMatchers(HttpMethod.PUT, endpoint + "/products/{id}").hasAnyRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/products/{id}").hasAnyRole("ADMIN")
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
                 .httpBasic(basic -> basic.authenticationEntryPoint(myBasicAuthenticationEntryPoint))

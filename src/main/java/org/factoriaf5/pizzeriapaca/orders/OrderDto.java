@@ -1,63 +1,52 @@
 package org.factoriaf5.pizzeriapaca.orders;
 
 import java.sql.Date;
-import jakarta.persistence.*;
-import java.util.List;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+import jakarta.validation.constraints.NotBlank;
+
+public class OrderDto {
+
+    @NotBlank
     private Long orderId;
 
-    @Column(name = "order_number")
-    private String orderNumber;
-
-    @Column(name = "order_type_code")
-    private String orderTypeCode;
-
-    @Column(name = "user_id")
+    @NotBlank
     private Long userId;
 
-    @Column(name = "payment_id")
+    @NotBlank
+    private String orderNumber;
+
+    @NotBlank
+    private String orderTypeCode;
+
+    @NotBlank
     private Long paymentId;
 
-    @Column(name = "order_status")
+    @NotBlank
     private String orderStatus;
 
-    @Column(name = "date_order")
+    @NotBlank
+    private Long orderDetailId;
+
+    @NotBlank
+    private Long productId;
+
+    @NotBlank
+    private Integer productQuantity;
+    
+    @NotBlank
     private Date dateOrder;
 
-    @Column(name = "order_total_paid")
-    private float totalPaid;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderDetail> orderDetails;
-
-    public Order() {
-        
-    }
-
-    public Order(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Date dateOrder, Float totalPaid) {
+    public OrderDto(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Long orderDetailId, Long productId, Integer productQuantity, Date dateOrder) {
         this.orderId = orderId;
         this.orderNumber = orderNumber;
         this.orderTypeCode = orderTypeCode;
         this.userId = userId;
         this.paymentId = paymentId;
         this.orderStatus = orderStatus;
+        this.orderDetailId = orderDetailId;
+        this.productId = productId;
+        this.productQuantity = productQuantity;
         this.dateOrder = dateOrder;
-        this.totalPaid= totalPaid;
-    }
-
-    public float gettotalPaid() {
-        return totalPaid;
-    }
-
-    public void settotalPaid(float totalPaid) {
-        this.totalPaid = totalPaid;
     }
 
     public Long getOrderId() {
@@ -74,6 +63,10 @@ public class Order {
 
     public void setDateOrder(Date dateOrder) {
         this.dateOrder = dateOrder;
+    }
+
+    public OrderDto(){
+
     }
 
     public String getOrderNumber() {
@@ -116,11 +109,27 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public List<OrderDetail> getOrderDetails() {
-        return orderDetails;
+    public Long getOrderDetailId() {
+        return orderDetailId;
     }
 
-    public void setOrderDetails(List<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setOrderDetailId(Long orderDetailId) {
+        this.orderDetailId = orderDetailId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Integer getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(Integer productQuantity) {
+        this.productQuantity = productQuantity;
     }
 }

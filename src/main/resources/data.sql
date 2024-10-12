@@ -64,3 +64,14 @@ INSERT INTO products (name, description, price, product_type, image, available) 
 ('Gelato', 'Helado italiano denso y cremoso, hecho con ingredientes naturales y de baja grasa.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Fgelato.png?alt=media&token=154c1203-a35e-4c1c-a54d-e7b0ac4319af', TRUE);
 
 
+-- Pedidos
+INSERT INTO orders (user_id, order_number, order_type_code, payment_id, order_status, date_order, order_total_paid) VALUES 
+(1, 'ORD001', 'ONLINE', 1, 'PENDING', '2023-10-01', '13.45'),
+(2, 'ORD002', 'IN_STORE', 2, 'COMPLETED', '2023-10-02', '23.90'),
+(3, 'ORD003', 'DELIVERY', 3, 'CANCELLED', '2023-10-03', '33.80');
+
+-- Detalles de los pedidos
+INSERT INTO order_details (order_id, product_id, product_quantity, product_price) VALUES 
+(1, 1, 2, '13.45'),
+(2, 2, 1, '23.90'),
+(3, 3, 3, '33.80');

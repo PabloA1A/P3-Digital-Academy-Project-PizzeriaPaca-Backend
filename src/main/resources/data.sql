@@ -1,6 +1,6 @@
 -- Roles
-INSERT INTO roles (role_id, name) VALUES (default, 'ROLE_USER');
-INSERT INTO roles (role_id, name) VALUES (default, 'ROLE_ADMIN');
+INSERT INTO roles (role_id, name) VALUES (default,'ROLE_USER');
+INSERT INTO roles (role_id, name) VALUES (default,'ROLE_ADMIN');
 INSERT INTO roles (role_id, name) VALUES (default,'ROLE_KITCHEN');
 INSERT INTO roles (role_id, name) VALUES (default,'ROLE_MOTORIST');
 
@@ -10,11 +10,18 @@ INSERT INTO users (user_id, username, password) VALUES (default, 'user', '$2a$12
 INSERT INTO users (user_id, username, password) VALUES (default, 'admin', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
 INSERT INTO users (user_id, username, password) VALUES (default, 'kitchen', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
 INSERT INTO users (user_id, username, password) VALUES (default, 'motorist', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
+INSERT INTO users (user_id, username, password) VALUES (default, 'L_user1', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
+INSERT INTO users (user_id, username, password) VALUES (default, 'L_user2', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
+INSERT INTO users (user_id, username, password) VALUES (default, 'L_user3', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO');
 -- Roles_Users
 INSERT INTO roles_users (role_id, user_id) VALUES (1, 1); 
 INSERT INTO roles_users (role_id, user_id) VALUES (2, 2);
 INSERT INTO roles_users (role_id, user_id) VALUES (3, 3);  
-INSERT INTO roles_users (role_id, user_id) VALUES (4, 4);  
+INSERT INTO roles_users (role_id, user_id) VALUES (4, 4);
+
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 5);
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 6);
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 7);  
 
 -- Profiles
 
@@ -23,6 +30,9 @@ INSERT INTO profiles (email, user_id) VALUES ('admin@mail.com', 2);
 INSERT INTO profiles (email, user_id) VALUES ('kitchen@mail.com', 3);
 INSERT INTO profiles (email, user_id) VALUES ('motorist@mail.com', 4);
 
+INSERT INTO profiles (email, user_id) VALUES ('user_1@mail.com', 5);
+INSERT INTO profiles (email, user_id) VALUES ('user_2@mail.com', 6);
+INSERT INTO profiles (email, user_id) VALUES ('use_3r@mail.com', 7);
 -- Customers
 INSERT INTO customers (username, password, email, first_name, last_name) VALUES ('customeruser', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO', 'customeruser@mail.com', 'Customer', 'User');
 INSERT INTO customers (username, password, email, first_name, last_name) VALUES ('customeradmin', '$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO', 'customeradmin@mail.com', 'Customer', 'Admin');
@@ -54,3 +64,14 @@ INSERT INTO products (name, description, price, product_type, image, available) 
 ('Gelato', 'Helado italiano denso y cremoso, hecho con ingredientes naturales y de baja grasa.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Fgelato.png?alt=media&token=154c1203-a35e-4c1c-a54d-e7b0ac4319af', TRUE);
 
 
+-- Pedidos
+INSERT INTO orders (user_id, order_number, order_type_code, payment_id, order_status, date_order, order_total_paid) VALUES 
+(1, 'ORD001', 'ONLINE', 1, 'PENDING', '2023-10-01', '13.45'),
+(2, 'ORD002', 'IN_STORE', 2, 'COMPLETED', '2023-10-02', '23.90'),
+(3, 'ORD003', 'DELIVERY', 3, 'CANCELLED', '2023-10-03', '33.80');
+
+-- Detalles de los pedidos
+INSERT INTO order_details (order_id, product_id, product_quantity, product_price) VALUES 
+(1, 1, 2, '13.45'),
+(2, 2, 1, '23.90'),
+(3, 3, 3, '33.80');

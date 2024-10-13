@@ -29,17 +29,16 @@ public class OrderDetail {
     private Integer productQuantity;
 
     @Column(name = "product_price")
-    private Float productPrice;
+    private Double productPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
     public OrderDetail() {
-
     }
 
-    public OrderDetail(Long id, Long orderId, Long productId, Integer productQuantity, Float productPrice, Order order) {
+    public OrderDetail(Long id, Long orderId, Long productId, Integer productQuantity, Double productPrice, Order order) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
@@ -48,11 +47,11 @@ public class OrderDetail {
         this.order = order;
     }
 
-    public Float getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Float productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 

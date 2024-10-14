@@ -63,7 +63,6 @@ INSERT INTO products (name, description, price, product_type, image, available) 
 ('Torta della Nonna', 'Tarta italiana con masa quebrada rellena de crema pastelera y cubierta de almendras.', 4.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2FLatortadellanonna.png?alt=media&token=fdd0eb04-d151-4718-bd56-6ac08272ce18', TRUE),
 ('Gelato', 'Helado italiano denso y cremoso, hecho con ingredientes naturales y de baja grasa.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Fgelato.png?alt=media&token=154c1203-a35e-4c1c-a54d-e7b0ac4319af', TRUE);
 
-
 -- Pedidos
 INSERT INTO orders (user_id, order_number, order_type_code, payment_id, order_status, date_order, order_total_paid) VALUES 
 (1, 'ORD001', 'ONLINE', 1, 'PENDING', '2023-10-01', '13.45'),

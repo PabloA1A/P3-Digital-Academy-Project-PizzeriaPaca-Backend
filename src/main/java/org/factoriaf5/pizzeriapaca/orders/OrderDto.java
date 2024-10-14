@@ -1,6 +1,7 @@
 package org.factoriaf5.pizzeriapaca.orders;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -19,34 +20,60 @@ public class OrderDto {
     private String orderTypeCode;
 
     @NotBlank
-    private Long paymentId;
+    private String paymentId;
 
     @NotBlank
     private String orderStatus;
-
+   
     @NotBlank
-    private Long orderDetailId;
+    private Float totalPaid;
 
-    @NotBlank
-    private Long productId;
-
-    @NotBlank
-    private Integer productQuantity;
-    
     @NotBlank
     private Date dateOrder;
+    
+    // Agregar lista de productos
+    private List<ProductDTO> products;
 
-    public OrderDto(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Long orderDetailId, Long productId, Integer productQuantity, Date dateOrder) {
+    public OrderDto(Long orderId, String orderNumber, String orderTypeCode, Long userId, String paymentId, String orderStatus, Float totalPaid, Date dateOrder) {
         this.orderId = orderId;
         this.orderNumber = orderNumber;
         this.orderTypeCode = orderTypeCode;
         this.userId = userId;
         this.paymentId = paymentId;
         this.orderStatus = orderStatus;
-        this.orderDetailId = orderDetailId;
-        this.productId = productId;
-        this.productQuantity = productQuantity;
+        this.totalPaid = totalPaid;
         this.dateOrder = dateOrder;
+    }
+
+    // Constructor por defecto
+    public OrderDto(){
+    }
+    public static class ProductDTO {
+        private Long productId;
+        private Integer productQuantity;
+        private Double productPrice;   
+
+        // Constructor por defecto
+        public ProductDTO() {}
+
+        public Long getProductId() {
+            return productId;
+        }
+        public void setProductId(Long productId) {
+            this.productId = productId;
+        }
+        public Integer getProductQuantity() {
+            return productQuantity;
+        }
+        public void setProductQuantity(Integer productQuantity) {
+            this.productQuantity = productQuantity;
+        }
+        public Double getProductPrice() {
+            return productPrice;
+        }
+        public void setProductPrice(Double productPrice) {
+            this.productPrice = productPrice;
+        } 
     }
 
     public Long getOrderId() {
@@ -63,10 +90,6 @@ public class OrderDto {
 
     public void setDateOrder(Date dateOrder) {
         this.dateOrder = dateOrder;
-    }
-
-    public OrderDto(){
-
     }
 
     public String getOrderNumber() {
@@ -93,11 +116,11 @@ public class OrderDto {
         this.userId = userId;
     }
 
-    public Long getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(Long paymentId) {
+    public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
     }
 
@@ -109,27 +132,52 @@ public class OrderDto {
         this.orderStatus = orderStatus;
     }
 
-    public Long getOrderDetailId() {
-        return orderDetailId;
+    public float getTotalPaid() {
+        return totalPaid;
     }
 
-    public void setOrderDetailId(Long orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public void setTotalPaid(Float totalPaid) {
+        this.totalPaid = totalPaid;
     }
 
-    public Long getProductId() {
-        return productId;
+    public List<ProductDTO> getProducts() {
+        return products;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProducts(List<ProductDTO> products) {
+        this.products = products;
     }
 
-    public Integer getProductQuantity() {
-        return productQuantity;
-    }
+    @Override
+    public String toString() {
+        StringBuilder productDetails = new StringBuilder();
+        if (products != null && !products.isEmpty()) {
+            productDetails.append("[");
+            for (ProductDTO product : products) {
+                productDetails.append("{")
+                            .append("productId='").append(product.getProductId()).append("', ")
+                            .append("productQuantity='").append(product.getProductQuantity()).append("', ")
+                            .append("productPrice='").append(product.getProductPrice()).append("'}");
+                productDetails.append(", ");
+            }
+            // Eliminar la última coma y espacio
+            if (productDetails.length() > 1) {
+                productDetails.setLength(productDetails.length() - 2);
+            }
+            productDetails.append("]");
+        } else {
+            productDetails.append("No products");
+        }
 
-    public void setProductQuantity(Integer productQuantity) {
-        this.productQuantity = productQuantity;
+        return "OrderDto{" +
+                "orderNumber='" + orderNumber + '\'' +
+                ", orderTypeCode='" + orderTypeCode + '\'' +
+                ", userId='" + userId + '\'' +
+                ", paymentId='" + paymentId + '\'' +
+                ", orderStatus='" + orderStatus + '\'' +
+                ", totalPaid='" + totalPaid + '\'' +
+                ", dateOrder='" + dateOrder + '\'' +
+                ", products=" + productDetails.toString() +
+                '}';
     }
 }

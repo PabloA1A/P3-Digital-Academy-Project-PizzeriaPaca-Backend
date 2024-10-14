@@ -107,10 +107,10 @@ public class ProductController {
         Product product = productOptional.get();
 
         try {
-            // Subir la imagen a Firebase
+            
             String fileUrl = uploadService.uploadFileToFirebaseAndSaveRecord(file);
-            product.setImage(fileUrl); // Actualizar el campo de imagen
-            productService.updateProduct(id, product); // Guarda el producto con la nueva imagen
+            product.setImage(fileUrl); 
+            productService.updateProduct(id, product); 
 
             return ResponseEntity.ok("Imagen subida exitosamente. URL: " + fileUrl);
         } catch (IOException e) {

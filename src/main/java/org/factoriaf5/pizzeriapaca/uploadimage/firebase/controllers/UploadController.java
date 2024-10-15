@@ -11,11 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @RestController
-@RequestMapping(path = "${api-endpoint}/images")
+@RequestMapping(path = "api/v1/images")
 public class UploadController {
 
-    @Autowired
-    UploadService service;
 
     @Autowired
     private UploadService uploadService;

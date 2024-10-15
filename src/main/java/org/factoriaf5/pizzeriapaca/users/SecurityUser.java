@@ -40,7 +40,7 @@ public class SecurityUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; 
+        return true;
     }
 
     @Override

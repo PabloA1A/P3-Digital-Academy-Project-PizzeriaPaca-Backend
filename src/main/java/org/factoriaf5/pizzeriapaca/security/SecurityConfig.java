@@ -3,6 +3,7 @@ package org.factoriaf5.pizzeriapaca.security;
 import java.util.Arrays;
 
 import java.util.Base64;
+
 import org.springframework.boot.CommandLineRunner;
 
 
@@ -52,17 +53,25 @@ public class SecurityConfig {
                 .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
                 .requestMatchers(HttpMethod.POST, endpoint + "/upload-image").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, endpoint + "/images").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/images").permitAll()
                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
                 .requestMatchers(HttpMethod.GET, endpoint + "/all").hasAnyRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, endpoint + "/available").permitAll()
+                .requestMatchers(HttpMethod.GET, endpoint + "/users").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/users/{id}").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
+                .requestMatchers(HttpMethod.DELETE, endpoint + "/**").hasAnyRole( "ADMIN")
+                .requestMatchers(HttpMethod.POST, endpoint + "/**").hasAnyRole( "ADMIN")
+                .requestMatchers(HttpMethod.PUT, endpoint + "/**").hasAnyRole( "ADMIN","KITCHEN", "MOTORIST")
+                .requestMatchers(HttpMethod.GET, endpoint + "/products/available").permitAll()
                 .requestMatchers(HttpMethod.GET, endpoint + "/products/type/{productType}").permitAll()
-                .requestMatchers(HttpMethod.DELETE, endpoint + "/products/{id}").permitAll()
-                .requestMatchers(HttpMethod.PUT, endpoint + "/products/{id}").hasAnyRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, endpoint + "/products/{id}").hasAnyRole("ADMIN")
-
+                .requestMatchers(HttpMethod.GET, endpoint + "/products/type/{productType}/available").permitAll()
+                .requestMatchers(HttpMethod.DELETE, endpoint + "/products/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, endpoint + "/products/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, endpoint + "/products/{id}").hasRole("ADMIN")
                 .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
                 .httpBasic(basic -> basic.authenticationEntryPoint(myBasicAuthenticationEntryPoint))
@@ -81,7 +90,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setMaxAge(Duration.ofHours(1)); 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

@@ -23,7 +23,8 @@ public class Order {
     private Long userId;
 
     @Column(name = "payment_id")
-    private Long paymentId;
+    //private Long paymentId;
+    private String paymentId;
 
     @Column(name = "order_status")
     private String orderStatus;
@@ -31,14 +32,16 @@ public class Order {
     @Column(name = "date_order")
     private Date dateOrder;
 
+    @Column(name = "order_total_paid")
+    private float totalPaid;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderDetail> orderDetails;
 
     public Order() {
-        
     }
 
-    public Order(Long orderId, String orderNumber, String orderTypeCode, Long userId, Long paymentId, String orderStatus, Date dateOrder) {
+    public Order(Long orderId, String orderNumber, String orderTypeCode, Long userId, String paymentId, String orderStatus, Date dateOrder, Float totalPaid) {
         this.orderId = orderId;
         this.orderNumber = orderNumber;
         this.orderTypeCode = orderTypeCode;
@@ -46,6 +49,15 @@ public class Order {
         this.paymentId = paymentId;
         this.orderStatus = orderStatus;
         this.dateOrder = dateOrder;
+        this.totalPaid= totalPaid;
+    }
+
+    public float gettotalPaid() {
+        return totalPaid;
+    }
+
+    public void settotalPaid(float totalPaid) {
+        this.totalPaid = totalPaid;
     }
 
     public Long getOrderId() {
@@ -88,11 +100,11 @@ public class Order {
         this.userId = userId;
     }
 
-    public Long getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(Long paymentId) {
+    public void setPaymentId(String paymentId) {
         this.paymentId = paymentId;
     }
 

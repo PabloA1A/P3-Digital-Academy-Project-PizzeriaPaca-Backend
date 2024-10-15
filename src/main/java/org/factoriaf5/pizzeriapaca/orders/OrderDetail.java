@@ -28,20 +28,31 @@ public class OrderDetail {
     @Column(name = "product_quantity")
     private Integer productQuantity;
 
+    @Column(name = "product_price")
+    private Double productPrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
     public OrderDetail() {
-
     }
 
-    public OrderDetail(Long id, Long orderId, Long productId, Integer productQuantity, Order order) {
+    public OrderDetail(Long id, Long orderId, Long productId, Integer productQuantity, Double productPrice, Order order) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
         this.productQuantity = productQuantity;
+        this.productPrice = productPrice;
         this.order = order;
+    }
+
+    public Double getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(Double productPrice) {
+        this.productPrice = productPrice;
     }
 
     public Long getId() {

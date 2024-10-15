@@ -3,6 +3,7 @@ package org.factoriaf5.pizzeriapaca.security;
 import java.util.Arrays;
 
 import java.util.Base64;
+
 import org.springframework.boot.CommandLineRunner;
 
 import org.factoriaf5.pizzeriapaca.uploadimage.local.services.implementations.IStorageService;
@@ -50,32 +51,27 @@ public class SecurityConfig {
                         .logoutUrl(endpoint + "/logout")
                         .deleteCookies("JSESSIONID"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers(HttpMethod.POST, endpoint + "/upload-image").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, endpoint + "/images").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.GET, endpoint + "/all").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, endpoint + "/users").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, endpoint + "/users/{id}").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.DELETE, endpoint + "/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, endpoint + "/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, endpoint + "/**").hasAnyRole("ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.GET, endpoint + "/available").permitAll()
-                        .requestMatchers(HttpMethod.GET, endpoint + "/products/type/{productType}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, endpoint + "/products/{id}").permitAll()
-                        .requestMatchers(HttpMethod.PUT, endpoint + "/products/{id}").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, endpoint + "/products/{id}").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, endpoint + "/orders/**").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.POST, endpoint + "/orders/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, endpoint + "/orders/**").hasAnyRole("ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.DELETE, endpoint + "/orders/**").hasAnyRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, endpoint + "/order-details/**").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.POST, endpoint + "/order-details/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(HttpMethod.PUT, endpoint + "/order-details/**").hasAnyRole("ADMIN", "KITCHEN", "MOTORIST")
-                        .requestMatchers(HttpMethod.DELETE, endpoint + "/order-details/**").hasAnyRole("ADMIN")
-                        .anyRequest().authenticated())
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                .requestMatchers(HttpMethod.POST, endpoint + "/upload-image").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, endpoint + "/images").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/images").permitAll()
+                .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
+                .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
+                .requestMatchers(HttpMethod.GET, endpoint + "/all").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/users").hasAnyRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, endpoint + "/users/{id}").hasAnyRole("USER", "ADMIN", "KITCHEN", "MOTORIST")
+                .requestMatchers(HttpMethod.DELETE, endpoint + "/**").hasAnyRole( "ADMIN")
+                .requestMatchers(HttpMethod.POST, endpoint + "/**").hasAnyRole( "ADMIN")
+                .requestMatchers(HttpMethod.PUT, endpoint + "/**").hasAnyRole( "ADMIN","KITCHEN", "MOTORIST")
+                .requestMatchers(HttpMethod.GET, endpoint + "/products/available").permitAll()
+                .requestMatchers(HttpMethod.GET, endpoint + "/products/type/{productType}").permitAll()
+                .requestMatchers(HttpMethod.GET, endpoint + "/products/type/{productType}/available").permitAll()
+                .requestMatchers(HttpMethod.DELETE, endpoint + "/products/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, endpoint + "/products/{id}").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST, endpoint + "/products/{id}").hasRole("ADMIN")
+                .anyRequest().authenticated())
                 .userDetailsService(jpaUserDetailsService)
                 .httpBasic(basic -> basic.authenticationEntryPoint(myBasicAuthenticationEntryPoint))
                 .sessionManagement(session -> session

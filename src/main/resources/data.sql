@@ -61,7 +61,8 @@ INSERT INTO products (name, description, price, product_type, image, available) 
 ('Tiramisú', 'Bizcochos de soletilla con crema de mascarpone, espolvoreados con cacao en polvo.', 9.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Ftiramisu.png?alt=media&token=946d986c-cb78-4ee4-b28a-edbc206bafcb', TRUE),
 ('Torta Caprese', 'Torta italiana sin gluten con chocolate negro y almendras molidas.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Ftortacaprese.png?alt=media&token=6403f473-95d3-4da3-935d-443428164a2c', TRUE),
 ('Torta della Nonna', 'Tarta italiana con masa quebrada rellena de crema pastelera y cubierta de almendras.', 4.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2FLatortadellanonna.png?alt=media&token=fdd0eb04-d151-4718-bd56-6ac08272ce18', TRUE),
-('Gelato', 'Helado italiano denso y cremoso, hecho con ingredientes naturales y de baja grasa.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Fgelato.png?alt=media&token=154c1203-a35e-4c1c-a54d-e7b0ac4319af', TRUE);
+('Gelato', 'Helado italiano denso y cremoso, hecho con ingredientes naturales y de baja grasa.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2Fgelato.png?alt=media&token=154c1203-a35e-4c1c-a54d-e7b0ac4319af', TRUE),
+('Costrata', 'La crostata de mermelada es un postre tradicional italiano que se caracteriza por su masa crujiente y su delicioso relleno de mermelada. Este dulce es popular en muchas regiones de Italia.', 7.00, 'POSTRE', 'https://firebasestorage.googleapis.com/v0/b/pizzeria-paca.appspot.com/o/uploads%2F069e547c-af59-4fde-89c3-8adc4a0227f4_crostatademermelada.webp?alt=media&token=18043326-b414-45fc-a45b-dee646ed21be', TRUE);
 
 
 -- Pedidos

@@ -28,13 +28,12 @@ public class OrderDtoService {
 
         orderRepository.save(order);
 
-         // Procesar los productos asociados a la orden
-        List<ProductDTO> productDtos = orderDto.getProducts(); // Obtenemos la lista de productos del DTO
+        List<ProductDTO> productDtos = orderDto.getProducts();
         if (productDtos != null && !productDtos.isEmpty()) {
 
-        // Guardar los productos relacionados
+     
         for (ProductDTO productDto : productDtos) {
-           // Crear un nuevo detalle de la orden para cada producto
+          
             OrderDetail orderDetail = new OrderDetail();
 
             orderDetail.setOrder(order);
@@ -42,7 +41,6 @@ public class OrderDtoService {
             orderDetail.setProductQuantity(productDto.getProductQuantity());
             orderDetail.setProductPrice(productDto.getProductPrice());
 
-            // Guardar cada detalle del producto
             orderDetailRepository.save(orderDetail);
         }
        }

@@ -1,7 +1,7 @@
 package org.factoriaf5.pizzeriapaca.register;
 
 import java.util.HashSet;
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.factoriaf5.pizzeriapaca.users.User;
 import org.factoriaf5.pizzeriapaca.roles.Role;
@@ -33,9 +33,10 @@ public class RegisterService {
         user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         user.setEmail(registerDto.getEmail());
 
+        
         Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new RoleNotFoundException("Role not found: ROLE_USER"));
-        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
 
         userRepository.save(user);
 

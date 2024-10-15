@@ -17,12 +17,12 @@ public class ProfileService {
         return profileRepository.save(profile);
     }
 
-    public String getEmailByUserId(Long userId) {
-        Optional<Profile> profileOptional = profileRepository.findById(userId);
-        if (profileOptional.isPresent()) {
-            return profileOptional.get().getEmail();
-        }
+    public Optional<Profile> findByUserId(Long userId) {
+        return profileRepository.findByUserId(userId);
+    }
 
-        return null;
+    public String getEmailByUserId(Long userId) {
+        Optional<Profile> profileOptional = profileRepository.findByUserId(userId);
+        return profileOptional.map(Profile::getEmail).orElse(null);
     }
 }

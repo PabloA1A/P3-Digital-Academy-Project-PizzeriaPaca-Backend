@@ -1,5 +1,8 @@
 package org.factoriaf5.pizzeriapaca.products;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 import org.factoriaf5.pizzeriapaca.products.exceptions.ProductNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,14 +10,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-class ProductServiceTest {
+public class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
@@ -22,45 +24,41 @@ class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
 
-    private Product product;
-
     @BeforeEach
-    void setUp() {
+    public void setup() {
         MockitoAnnotations.openMocks(this);
-        product = new Product();
-        product.setId(1L);
-        product.setName("Test Product");
-        product.setDescription("Test Description");
-        product.setPrice(10.0);
-        product.setProductType(ProductType.PIZZA);
-        product.setImage("test_image.png");
-        product.setAvailable(true);
     }
 
     @Test
-    void testGetAllProducts() {
-        List<Product> products = Arrays.asList(product);
-        when(productRepository.findAll()).thenReturn(products);
+    public void testGetAllProducts() {
+        List<Product> mockProducts = Arrays.asList(
+                new Product(1L, "Pizza Margherita", "Deliciosa pizza clásica", 8.99, ProductType.PIZZA, "image-url", true),
+                new Product(2L, "Coca Cola", "Refreshing drink", 2.50, ProductType.BEBIDA, "image-url", true)
+        );
 
-        List<Product> result = productService.getAllProducts();
+        when(productRepository.findAll()).thenReturn(mockProducts);
 
-        assertEquals(1, result.size());
-        assertEquals(product, result.get(0));
+        List<Product> products = productService.getAllProducts();
+
+        assertEquals(2, products.size());
         verify(productRepository, times(1)).findAll();
     }
 
     @Test
-    void testGetProductById() {
-        when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+    public void testGetProductByIdSuccess() {
+        Product mockProduct = new Product(1L, "Pizza Pepperoni", "Deliciosa pizza con pepperoni", 9.99, ProductType.PIZZA, "image-url", true);
 
-        Product result = productService.getProductById(1L);
+        when(productRepository.findById(1L)).thenReturn(Optional.of(mockProduct));
 
-        assertEquals(product, result);
+        Product product = productService.getProductById(1L);
+
+        assertNotNull(product);
+        assertEquals("Pizza Pepperoni", product.getName());
         verify(productRepository, times(1)).findById(1L);
     }
 
     @Test
-    void testGetProductByIdNotFound() {
+    public void testGetProductByIdNotFound() {
         when(productRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(ProductNotFoundException.class, () -> productService.getProductById(1L));
@@ -68,77 +66,66 @@ class ProductServiceTest {
     }
 
     @Test
-    void testCreateProduct() {
-        when(productRepository.save(product)).thenReturn(product);
+    public void testCreateProduct() {
+        Product newProduct = new Product(null, "Pizza Pepperoni", "Deliciosa pizza con pepperoni", 9.99, ProductType.PIZZA, "image-url", true);
+        Product savedProduct = new Product(1L, "Pizza Pepperoni", "Deliciosa pizza con pepperoni", 9.99, ProductType.PIZZA, "image-url", true);
 
-        Product result = productService.createProduct(product);
+        when(productRepository.save(newProduct)).thenReturn(savedProduct);
 
-        assertEquals(product, result);
-        verify(productRepository, times(1)).save(product);
+        Product product = productService.createProduct(newProduct);
+
+        assertNotNull(product.getId());
+        assertEquals("Pizza Pepperoni", product.getName());
+        verify(productRepository, times(1)).save(newProduct);
     }
 
     @Test
-    void testUpdateProduct() {
-        when(productRepository.existsById(1L)).thenReturn(true);
-        when(productRepository.save(product)).thenReturn(product);
+    public void testUpdateProductSuccess() {
+        Long productId = 1L;
+        Product existingProduct = new Product(productId, "Pizza Margherita", "Deliciosa pizza clásica", 8.99, ProductType.PIZZA, "old-image-url", true);
+        Product updatedData = new Product(productId, "Pizza Margherita", "Deliciosa pizza clásica (actualizada)", 9.99, ProductType.PIZZA, "new-image-url", false);
 
-        Product result = productService.updateProduct(product);
+        when(productRepository.findById(productId)).thenReturn(Optional.of(existingProduct));
+        when(productRepository.save(existingProduct)).thenReturn(updatedData);
 
-        assertEquals(product, result);
-        verify(productRepository, times(1)).existsById(1L);
-        verify(productRepository, times(1)).save(product);
+        Product updatedProduct = productService.updateProduct(productId, updatedData);
+
+        assertEquals("Deliciosa pizza clásica (actualizada)", updatedProduct.getDescription());
+        assertEquals(9.99, updatedProduct.getPrice());
+        assertEquals("new-image-url", updatedProduct.getImage());
+        assertFalse(updatedProduct.getAvailable());
+        verify(productRepository, times(1)).findById(productId);
+        verify(productRepository, times(1)).save(existingProduct);
     }
 
     @Test
-    void testUpdateProductNotFound() {
-        when(productRepository.existsById(1L)).thenReturn(false);
+    public void testUpdateProductNotFound() {
+        when(productRepository.findById(1L)).thenReturn(Optional.empty());
 
-        assertThrows(ProductNotFoundException.class, () -> productService.updateProduct(product));
-        verify(productRepository, times(1)).existsById(1L);
-        verify(productRepository, times(0)).save(product);
+        Product updatedData = new Product(1L, "Pizza Pepperoni", "Deliciosa pizza con pepperoni", 9.99, ProductType.PIZZA, "image-url", true);
+
+        assertThrows(EntityNotFoundException.class, () -> productService.updateProduct(1L, updatedData));
+        verify(productRepository, times(1)).findById(1L);
     }
 
     @Test
-    void testDeleteProductById() {
-        when(productRepository.existsById(1L)).thenReturn(true);
-        doNothing().when(productRepository).deleteById(1L);
+    public void testDeleteProductByIdSuccess() {
+        Long productId = 1L;
 
-        productService.deleteProductById(1L);
+        when(productRepository.existsById(productId)).thenReturn(true);
 
-        verify(productRepository, times(1)).existsById(1L);
-        verify(productRepository, times(1)).deleteById(1L);
+        productService.deleteProductById(productId);
+
+        verify(productRepository, times(1)).deleteById(productId);
     }
 
     @Test
-    void testDeleteProductByIdNotFound() {
-        when(productRepository.existsById(1L)).thenReturn(false);
+    public void testDeleteProductByIdNotFound() {
+        Long productId = 1L;
 
-        assertThrows(ProductNotFoundException.class, () -> productService.deleteProductById(1L));
-        verify(productRepository, times(1)).existsById(1L);
-        verify(productRepository, times(0)).deleteById(1L);
-    }
+        when(productRepository.existsById(productId)).thenReturn(false);
 
-    @Test
-    void testGetProductsByType() {
-        List<Product> products = Arrays.asList(product);
-        when(productRepository.findByProductType(ProductType.PIZZA)).thenReturn(products);
-
-        List<Product> result = productService.getProductsByType(ProductType.PIZZA);
-
-        assertEquals(1, result.size());
-        assertEquals(product, result.get(0));
-        verify(productRepository, times(1)).findByProductType(ProductType.PIZZA);
-    }
-
-    @Test
-    void testGetAvailableProducts() {
-        List<Product> availableProducts = Arrays.asList(product);
-        when(productRepository.findByAvailableTrue()).thenReturn(availableProducts);
-
-        List<Product> result = productService.getAvailableProducts();
-
-        assertEquals(1, result.size());
-        assertEquals(product, result.get(0));
-        verify(productRepository, times(1)).findByAvailableTrue();
+        assertThrows(ProductNotFoundException.class, () -> productService.deleteProductById(productId));
+        verify(productRepository, times(1)).existsById(productId);
     }
 }

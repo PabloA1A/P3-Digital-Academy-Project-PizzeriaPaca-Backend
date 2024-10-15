@@ -1,10 +1,13 @@
 package org.factoriaf5.pizzeriapaca.products;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.factoriaf5.pizzeriapaca.products.exceptions.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ProductService {
@@ -24,12 +27,22 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public Product updateProduct(Product product) {
-        if (!repository.existsById(product.getId())) {
-            throw new ProductNotFoundException("Product not found");
-        }
-        return repository.save(product);
+   public Product updateProduct(Long id, Product product) {
+    Optional<Product> existingProduct = repository.findById(id);
+    
+    if (existingProduct.isPresent()) {
+        Product productToUpdate = existingProduct.get();
+        productToUpdate.setName(product.getName());
+        productToUpdate.setPrice(product.getPrice());
+        productToUpdate.setDescription(product.getDescription());
+        productToUpdate.setProductType(product.getProductType());
+        productToUpdate.setImage(product.getImage());
+        productToUpdate.setAvailable(product.getAvailable());
+        return repository.save(productToUpdate);
+    } else {
+        throw new EntityNotFoundException("Producto no encontrado");
     }
+}
 
     public void deleteProductById(Long id) {
         if (!repository.existsById(id)) {
@@ -44,6 +57,10 @@ public class ProductService {
 
     public List<Product> getAvailableProducts() {
         return repository.findByAvailableTrue();
+    }
+
+    public List<Product> getAvailableProductsByType(ProductType productType) {
+        return repository.findByProductTypeAndAvailableTrue(productType);
     }
     
 }

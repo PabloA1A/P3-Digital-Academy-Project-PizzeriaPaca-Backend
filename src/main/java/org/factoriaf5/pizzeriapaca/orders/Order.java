@@ -23,7 +23,7 @@ public class Order {
     private Long userId;
 
     @Column(name = "payment_id")
-    //private Long paymentId;
+  
     private String paymentId;
 
     @Column(name = "order_status")

@@ -160,7 +160,7 @@ public class OrderDto {
                             .append("productPrice='").append(product.getProductPrice()).append("'}");
                 productDetails.append(", ");
             }
-            // Eliminar la última coma y espacio
+          
             if (productDetails.length() > 1) {
                 productDetails.setLength(productDetails.length() - 2);
             }

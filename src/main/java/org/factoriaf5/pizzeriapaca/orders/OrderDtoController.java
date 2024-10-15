@@ -22,7 +22,7 @@ public class OrderDtoController {
 
     @PostMapping
     public ResponseEntity<Map<String, String>> createOrder(@RequestBody OrderDto orderDto) {
-        // Imprimir el contenido de orderDto
+  
         System.out.println("Datos del orderDto: " + orderDto);
 
         Order order = service.save(orderDto);

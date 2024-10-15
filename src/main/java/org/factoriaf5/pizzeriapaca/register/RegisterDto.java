@@ -31,6 +31,10 @@ public class RegisterDto {
     @NotBlank
     private String city;
     
+    public RegisterDto(){
+
+    }
+    
     public RegisterDto(String username, String password, String email, String firstName, String lastName,
     String address, String postalCode, String city) {
         this.username = username;

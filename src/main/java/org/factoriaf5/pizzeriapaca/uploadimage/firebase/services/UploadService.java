@@ -9,7 +9,6 @@ import org.factoriaf5.pizzeriapaca.uploadimage.firebase.models.FileRecord;
 import org.factoriaf5.pizzeriapaca.uploadimage.firebase.repository.FirebaseRepository;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket;
 import com.google.firebase.cloud.StorageClient;

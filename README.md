@@ -155,6 +155,7 @@ mvn spring-boot:run
 
 5. Estructura de Carpetas: 
 
+```bash
 P3-Digital-Academy-Project-PizzeriaPaca-Backend
 ├─ .git
 ├─ .gitignore
@@ -270,7 +271,7 @@ P3-Digital-Academy-Project-PizzeriaPaca-Backend
    │     │  └─ additional-spring-configuration-metadata.json
    │     └─ static
    └─ test
-
+```
 
 ## 🎮 Uso
 
